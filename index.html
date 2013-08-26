@@ -1,0 +1,17 @@
+---
+layout: default
+title: Maciej Goszczycki CV
+---
+
+<pre>
+<span class="cmd">master</span> ~/CV <span class="cmd">▶ markdown</span> <span class="arg">cv.md</span> <span class="red">> cv.html</span>
+
+<span class="red">master</span> ~/CV <span class="cmd">▶ less</span> <span class="arg">cv.html</span>
+</pre>
+{% for post in site.posts %}
+  {{ post.content }}
+{% endfor %}
+<pre>
+
+<span class="red">master</span> ~/CV <span class="cmd">▶</span>
+</pre>

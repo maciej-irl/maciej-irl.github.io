@@ -1,0 +1,36 @@
+body {
+  background-color: #2d2d2d;
+}
+
+body, 
+a {
+  color: #cccccc;
+}
+
+body,
+pre {
+  font-family: 'Ubuntu Mono', sans-serif;
+}
+
+.cmd,
+.arg,
+.red,
+.str {
+  font-weight: bold;
+}
+
+.cmd {
+  color: #9ec400;
+}
+
+.str {
+  color: #6699cc;
+}
+
+.arg {
+  color: #b777e0;
+}
+
+.red {
+  color: #ff3334;
+}
