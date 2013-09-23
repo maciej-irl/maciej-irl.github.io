@@ -7,9 +7,27 @@
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="/css/syntax.css">
         <link rel="stylesheet" href="/css/main.css">
-        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:400,700" rel="stylesheet" type="text/css">
     </head>
     <body>
-      {{ content }}
+      <nav>
+        <a href="/"><h1>
+          <img src="http://www.gravatar.com/avatar/64ce0ac7d44d2076d23b21ac62214970.png"></img>
+          mgoszcz2's / <span>{{ page.kind }}</span>
+        </h1></a>
+        <div>
+          <a href="/">Blog</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/cv.html">CV</a>
+        </div>
+      </nav>
+      <article>
+        {{ content }}
+      </article>
+      <footer>
+        mgoszcz2 - Maciej Goszczycki - All Right Reserved 2013
+        <a href="https://gist.github.com/mgoszcz2/6661907">Signature</a>
+      </footer>
+      <script src="/js/main.js"></script>
     </body>
 </html>

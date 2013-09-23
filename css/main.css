@@ -1,38 +1,164 @@
+/* Reset all*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Body*/
 body {
-  background-color: #2d2d2d;
-  max-width: 800px;
+  font: 18px 'PT Sans', sans-serif;
+  color: #353738;
+  margin: 20px;
+  padding: auto;
 }
 
-body, 
-a {
+/* Nice spacing*/
+article {
+  line-height: 1.5em;
+  max-width: 700px;
+  margin: 80px auto 0;
+}
+
+article h1 {
+  margin: 0 0 1em;
+}
+
+/* Header styles*/
+h1,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'PT Serif', serif;
+  font-weight: 700;
+  text-align: center;
+  margin: 1em 0;
+  line-height: 1em;
+}
+
+/*Clear fix*/
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+nav.scrolled {
+  box-shadow: 0 -4px 20px #cccccc;
+}
+
+/* Blog branding*/
+nav h1 {
+  font-size: 1.5em;
+  text-align: left;
   color: #cccccc;
-  line-height: 120%;
+  font-family: 'PT Sans', sans-serif;
+  float: left;
+  margin: 0;
 }
 
-body,
-pre {
-  font-family: 'Ubuntu Mono', sans-serif;
+/* The /<stuff> part*/
+nav h1 span {
+  color: #353738;
 }
 
-.cmd,
-.arg,
-.red,
-.str {
-  font-weight: bold;
+/* Full color on hover*/
+nav h1:hover {
+  color: #353738;
 }
 
-.cmd {
-  color: #9ec400;
+nav img {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
-.str {
-  color: #6699cc;
+@media all and (max-width: 450px) {
+  nav img {
+    display: none;
+  }
 }
 
-.arg {
-  color: #b777e0;
+/* Nav is on right and spaced - http://stackoverflow.com/a/8185290/1219515*/
+nav div a + a {
+  margin-left: 20px;
 }
 
-.red {
-  color: #ff3334;
+/* Nav a effects*/
+nav div a {
+  color: #353738;
+}
+
+nav div {
+  float: right;
+}
+
+/* Header sizes*/
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+/* General margins*/
+p,
+footer {
+  margin: 1em 0;
+}
+
+/* Center footer*/
+footer {
+  text-align: center;
+  color: #cccccc;
+}
+
+/* Fix * reset*/
+ul,
+ol {
+  padding-left: 2em;
+}
+
+/*General links*/
+a {
+  color: #6B72FF;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3C45FF;
+  text-decoration: underline;
+}
+
+/* No bullet, F*** IE9*/
+.nobullet,
+.nobullet li {
+  list-style-type: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.center li, ul {
+  padding: 0;
+  margin: 0;
 }

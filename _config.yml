@@ -1,3 +1,4 @@
-name: Your New Jekyll Site
+name: mgoszcz2's Quaint blog
 markdown: redcarpet
 pygments: true
+permalink: /:title.html

@@ -1,17 +1,16 @@
 ---
 layout: default
-title: Maciej Goszczycki CV
+title: mgoszcz2
+kind: index
 ---
 
-<pre>
-<span class="cmd">master</span> ~/CV <span class="cmd">▶ markdown</span> <span class="arg">cv.md</span> <span class="red">> cv.html</span>
-
-<span class="red">master</span> ~/CV <span class="cmd">▶ cat</span> <span class="arg">cv.html</span>
-</pre>
+There's nothing here. (Yet)
+<ul class="nobullet">
 {% for post in site.posts %}
-  {{ post.content }}
+  <li>
+    <a href="{{ post.url }}"><h2>{{ post.title }}</h2></a></h2>
+    {{ post.excerpt }}
+    <a href="{{ post.url }}">Continue reading..</a>
+  </li>
 {% endfor %}
-<pre>
-
-<span class="red">master</span> ~/CV <span class="cmd">▶</span>
-</pre>
+</ul>
