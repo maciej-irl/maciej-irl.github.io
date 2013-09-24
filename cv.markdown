@@ -7,7 +7,7 @@ title: CV - mgoszcz2
 # Curriculum vitae
 
 __Maciej Goszczycki__<br>
-Email: mgoszcz2@gmail.com<br>
+Email: me@mgo2.me<br>
 Site: [mgo2.me](http://mgo2.me)
 
 ## Education
