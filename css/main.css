@@ -39,6 +39,13 @@ h6 {
   line-height: 1em;
 }
 
+/* Move image to the right */
+body > a {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
 /* Image thingy */
 body > a img {
   transition: width 0.3s;
@@ -75,31 +82,20 @@ nav div {
 /* Blog branding */
 nav h1 {
   font-size: 1.5em;
-  color: #cccccc;
   font-family: 'PT Sans', sans-serif;
-  margin: 0 0 0.5em;
-}
-
-/* The /<stuff> part */
-nav h1 span {
-  color: #353738;
-}
-
-/* Full color on hover */
-nav h1:hover {
-  color: #353738;
+  margin: 0 2em 1em 0;
 }
 
 /* No underline on the branding */
-nav > a:hover {
+nav h1 a {
+  color: #cccccc;
   text-decoration: none;
 }
 
-/* Center image */
-body > a {
-  position: fixed;
-  top: 20px;
-  left 20px;
+/* Full color on hover and / part */
+nav h1 span,
+nav h1 a:hover {
+  color: #353738;
 }
 
 /* Nav a effects*/
@@ -150,6 +146,7 @@ footer {
 footer {
   text-align: center;
   color: #cccccc;
+  clear: both;
 }
 
 /* Fix * reset*/
