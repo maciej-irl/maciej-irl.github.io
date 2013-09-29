@@ -1,10 +1,10 @@
-/* Reset all*/
+/* Reset all */
 * {
   margin: 0;
   padding: 0;
 }
 
-/* Body*/
+/* Body */
 body {
   font: 18px 'PT Sans', sans-serif;
   color: #353738;
@@ -12,13 +12,14 @@ body {
   padding: auto;
 }
 
-/* Nice spacing*/
+/* Nice spacing */
 article {
   line-height: 1.5em;
   max-width: 700px;
-  margin: 80px auto 0;
+  margin: 0 auto;
 }
 
+/* Better h1 in article */
 article h1 {
   margin: 0 0 1em;
 }
@@ -38,76 +39,96 @@ h6 {
   line-height: 1em;
 }
 
-/*Clear fix*/
+/* Image thingy */
+body > a img {
+  transition: width 0.3s;
+  -moz-transition: box-shadow 0.3s;
+  -webkit-transition: box-shadow 0.3s;
+  -o-transition: box-shadow 0.3s;
+  box-shadow: 0 0 5px #cccccc;
+  width: 2em;
+  height: 2em;
+}
+
+body > a img:hover {
+  box-shadow: 0 0 10px 1px #cccccc;
+}
+
+/* Move nav to right */
+nav {
+  float: right;
+}
+
+/* Clear fix nav */
 nav:after {
   content: "";
   display: table;
   clear: both;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #ffffff;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 20px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+/* Nav link to right too */
+nav div {
+  text-align: right;
 }
 
-nav.scrolled {
-  box-shadow: 0 -4px 20px #cccccc;
-}
 
-/* Blog branding*/
+/* Blog branding */
 nav h1 {
   font-size: 1.5em;
-  text-align: left;
   color: #cccccc;
   font-family: 'PT Sans', sans-serif;
-  float: left;
-  margin: 0;
+  margin: 0 0 0.5em;
 }
 
-/* The /<stuff> part*/
+/* The /<stuff> part */
 nav h1 span {
   color: #353738;
 }
 
-/* Full color on hover*/
+/* Full color on hover */
 nav h1:hover {
   color: #353738;
 }
 
-nav img {
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 10px;
+/* No underline on the branding */
+nav > a:hover {
+  text-decoration: none;
 }
 
-@media all and (max-width: 450px) {
-  nav img {
-    display: none;
-  }
-}
-
-/* Nav is on right and spaced - http://stackoverflow.com/a/8185290/1219515*/
-nav div a + a {
-  margin-left: 20px;
+/* Center image */
+body > a {
+  position: fixed;
+  top: 20px;
+  left 20px;
 }
 
 /* Nav a effects*/
 nav div a {
   color: #353738;
+  display: block;
 }
 
-nav div {
-  float: right;
+/* Move nav to the center */
+@media all and (max-width: 900px) {
+  nav {
+    float: none;
+    text-align: center;
+  }
+
+  nav div {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+}
+
+/* Move image to center */
+@media all and (max-width: 400px) {
+  body > a {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-bottom: 1em;
+  }
 }
 
 /* Header sizes*/
@@ -137,7 +158,7 @@ ol {
   padding-left: 2em;
 }
 
-/*General links*/
+/* Nice links */
 a {
   color: #6B72FF;
   text-decoration: none;
@@ -148,7 +169,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* No bullet, F*** IE9*/
+/* Usefull stuff */
 .nobullet,
 .nobullet li {
   list-style-type: none;
@@ -158,7 +179,7 @@ a:hover {
   text-align: center;
 }
 
-.center li, ul {
+.center li, .center ul {
   padding: 0;
   margin: 0;
 }
