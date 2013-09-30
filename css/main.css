@@ -27,8 +27,8 @@ article h1 {
 article img {
   display: block;
   margin: 0 auto;
-  max-width: 400px;
-  max-height: 400px;
+  box-shadow: 0 0 5px #cccccc;
+  width: 100%;
 }
 
 /* Header styles*/
@@ -191,3 +191,4 @@ a:hover {
 .slide {
   height: 100%;
 }
+
