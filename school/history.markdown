@@ -10,7 +10,7 @@ title: William Martin Murphy - mgoszcz2
 ## Overview
 Most famous for standing against the trade union movement organised by Jim Larkin.
 
-Despite being shown as a villain in history he considered himself a good employer and a proud irish citizen.
+Despite being shown as a villain in history he considered himself a good employer and a proud Irish citizen.
 
 ## What he did?
 
@@ -20,10 +20,10 @@ He was a publisher, businessman, and a politician.
 
 William Martin Murphy is mostly know as a publisher of newspapers. He has a monopoly over the newspaper market with many newspapers that we still can read today. Those include:
 
-* Irish Daily independent
-* Daily nation
-* Freeman's journal
-* Irish independent
+* Irish Daily Independent
+* Daily Nation
+* Freeman's Journal
+* Irish Independent
 
 ## Businessman
 
@@ -34,7 +34,7 @@ He build churches, schools and bridges and was one of the most important people 
 He was elected Irish Parliamentary Party MP in the 1885 General Election.
 Taking his seat in the House of Commons of the United Kingdom of Great Britain and Ireland. 
 
-We can see he really supported Irish affairs
+We can see he really supported Irish affairs.
 
 ## The positive image
 
