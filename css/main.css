@@ -70,6 +70,7 @@ body > a img {
   box-shadow: 0 0 5px #cccccc;
   width: 2em;
   height: 2em;
+  border: 0;
 }
 
 body > a img:hover {
