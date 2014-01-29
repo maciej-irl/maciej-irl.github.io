@@ -1,46 +1,35 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/css/syntax.css">
-        <link rel="stylesheet" href="/css/main.css">
-        <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif:400,700" rel="stylesheet" type="text/css">
-        <script type="text/javascript">
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-44442189-1']);
-          _gaq.push(['_setDomainName', 'mgo2.me']);
-          _gaq.push(['_trackPageview']);
+<html lang="en">
+  <head>
+    <title>{{ page.title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
 
-          (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-        </script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    </head>
+  <body>
+    <main>
+      <img src="/img/me.jpg">
 
-    <body>
-      <a href="/"><img id="brand" src="http://www.gravatar.com/avatar/64ce0ac7d44d2076d23b21ac62214970.png"></a>
-      <nav>
-        <h1><a href="/">
-          mgoszcz2's / <span>{{ page.kind }}</span>
-        </a></h1>
-        <div>
-          <a href="/">Blog</a>
-          <a href="/contact.html">Contact</a>
-          <a href="/cv.html">CV</a>
-        </div>
-      </nav>
-      <article>
+      <section class="text">
+        <!-- Should be replaced by Jekyll article -->
+        <h1>{{ page.title }}</h1>
+        <h2 class="hidden">{{ page.subtitle }}</h2>
         {{ content }}
-      </article>
-      <footer>
-        mgoszcz2 - Maciej Goszczycki - All Right Reserved 2013
-        <a href="https://gist.github.com/mgoszcz2/6661907">Signature</a>
-      </footer>
-    </body>
+      </section>
+
+      <ul class="linklist">
+        <li><a href="#">CV</a></li>
+        <li><a href="https://twitter.com/mgoszcz2">Twitter</a></li>
+        <li><a href="https://github.com/mgoszcz2">GitHub</a></li>
+        <li><a href="mailto:me@mgoszcz2.com">Email</a></li>
+      </ul>
+
+      <br> <!-- Nice mouse selections #XKCD #OCD -->
+    </main>
+  </body>
 </html>

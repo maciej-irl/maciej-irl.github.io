@@ -1,238 +1,121 @@
-/* Reset all */
-* {
-  margin: 0;
-  padding: 0;
-}
-
-/* Sticky footer fix */
-html {
-  /* Sticky footer */
-  position: relative;
-  min-height: 100%;
-}
-
-/* Body */
+/* Nice Sans font */
 body {
-  font: 18px 'PT Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
   color: #353738;
-  /* Sticky footer */
-  /* Assumes footer is 30px + 10px for spacing + 20px body margin */
-  margin: 20px 20px 60px;
 }
 
-/* Nice spacing */
-article {
-  line-height: 1.5em;
-  max-width: 700px;
-  margin: 0 auto;
+footer {
 }
 
-/* Better h1 in article */
-article h1 {
-  margin: 0 0 1em;
-}
-
-article img {
-  display: block;
-  margin: 0 auto;
-  box-shadow: 0 0 5px #cccccc;
+/* 50% with a nice border */
+main {
   width: 50%;
+  margin: 2em auto 0;
+  overflow: hidden;
 }
 
-/* Header styles*/
-h1,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'PT Serif', serif;
-  font-weight: 700;
-  text-align: center;
-  margin: 1em 0;
-  line-height: 1em;
+/* Nice padding (not applied to main to keep image to the right
+no overflow to allow for larger texts */
+main .text {
+  padding: 0 20px;
 }
 
-/* Move image to the right */
-body > a {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+/* No padding to the top (oveflows to deal with floats) */
+main .linklist {
+  padding: 0 20px 20px;
+  overflow: auto;
 }
 
-/* Image thingy */
-body > a img {
-  transition: width 0.3s;
-  -moz-transition: box-shadow 0.3s;
-  -webkit-transition: box-shadow 0.3s;
-  -o-transition: box-shadow 0.3s;
-  box-shadow: 0 0 5px #cccccc;
-  width: 2em;
-  height: 2em;
-  border: 0;
-}
-
-body > a img:hover {
-  box-shadow: 0 0 10px 1px #cccccc;
-}
-
-/* Move nav to right */
-nav {
+/* Image on the right (padding works since main.overflow is hidden) */
+main img {
   float: right;
-}
-
-/* Clear fix nav */
-nav:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Nav link to right too */
-nav div {
-  text-align: right;
+  height: 30em;
+  margin: 0 0 2em 2em;
 }
 
 
-/* Blog branding */
-nav h1 {
-  font-size: 1.5em;
-  font-family: 'PT Sans', sans-serif;
-  margin: 0 2em 1em 0;
+/* Grey-ish text */
+main .hidden,
+main .text p:first-child {
+  color: #9c9c9c;
 }
 
-/* No underline on the branding */
-nav h1 a {
-  color: #cccccc;
-  text-decoration: none;
+/* Selection for webkit and moz */
+main *::selection {
+  background: #ccc;
+}
+main *::-moz-selection {
+  background: #ccc;
 }
 
-/* Full color on hover and / part */
-nav h1 span,
-nav h1 a:hover {
-  color: #353738;
-}
-
-/* Nav a effects*/
-nav div a {
-  color: #353738;
-  display: block;
-}
-
-/* Move nav to the center */
-@media all and (max-width: 900px) {
-  nav {
-    float: none;
-    text-align: center;
-  }
-
-  nav div {
-    text-align: center;
-    margin-bottom: 1em;
-  }
-}
-
-/* Move image to center */
-@media all and (max-width: 400px) {
-  body > a {
-    position: static;
-    display: block;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-}
-
-/* Header sizes*/
-h1 {
-  font-size: 3em;
-}
-
-h2 {
-  font-size: 2em;
-}
-
-/* General margins*/
-p,
-footer {
-  margin: 1em 0;
-}
-
-/* Center footer and stick it */
-footer {
-  text-align: center;
-  color: #cccccc;
-  clear: both;
-  /* Sticky footer */
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 30px;
-  width: 100%;
-}
-
-/* Fix * reset*/
-ul,
-ol {
-  padding-left: 2em;
-}
-
-/* Nice links */
-a {
-  color: #6B72FF;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #3C45FF;
-  text-decoration: underline;
-}
-
-/* Usefull stuff */
-.nobullet,
-.nobullet li {
-  list-style-type: none;
-}
-
-.center {
-  text-align: center;
-}
-
-.center li, .center ul {
-  padding: 0;
+/* List but one without bullets */
+ul.linklist,
+ul.linklist li {
+  list-style: none;
   margin: 0;
 }
 
-/* Show styles */
-#prev,
-#next {
-  position: fixed;
-  top: 50%;
-  padding: 10px;
-  background-color: #ffffff;
-  border: 0;
-  font: inherit;
-  cursor: pointer;
-  transition: box-shadow 0.3s;
-  -moz-transition: box-shadow 0.3s;
-  -webkit-transition: box-shadow 0.3s;
-  -o-transition: box-shadow 0.3s;
-  box-shadow: 0 0 5px #cccccc;
+/* Invisible block links spanning 100% */
+.linklist a {
+  display: inline-block;
+  color: #306D9C;
+  text-decoration: none;
+  width: 100%;
+  padding: 0.25em 0;
 }
 
-#prev:hover,
-#next:hover {
-  box-shadow: 0 0 10px 1px #cccccc;
+/* RAINBOW a's */
+.linklist li:nth-child(1n) a:hover {
+  background: #94E475;
+}
+.linklist li:nth-child(2n) a:hover {
+  background: #67D8F5;
+}
+.linklist li:nth-child(3n) a:hover {
+  background: #FDFD66;
+}
+.linklist li:nth-child(4n) a:hover {
+  background: #FF5D5D;
 }
 
-#prev:active,
-#next:active {
-  background-color: #eeeeee;
+/* RAINBOW highlight (let's just say CSS sucks) */
+.linklist li:nth-child(1n) a::selection {
+  background: #94E475;
+}
+.linklist li:nth-child(1n) a::-moz-selection {
+  background: #94E475;
+}
+.linklist li:nth-child(2n) a::selection {
+  background: #67D8F5;
+}
+.linklist li:nth-child(2n) a::-moz-selection {
+  background: #67D8F5;
+}
+.linklist li:nth-child(3n) a::selection {
+  background: #FDFD66;
+}
+.linklist li:nth-child(3n) a::-moz-selection {
+  background: #FDFD66;
+}
+.linklist li:nth-child(4n) a::selection {
+  background: #FF5D5D;
+}
+.linklist li:nth-child(4n) a::-moz-selection {
+  background: #FF5D5D;
 }
 
-#prev {
-  left: 0;
+/* Make width bigger on small screens */
+@media (max-width: 1200px) {
+  main {
+    width: 80%;
+  }
 }
-#next {
-  right: 0;
+@media (orientation: portrait) and (max-width: 1200px) {
+  main img{
+    float: none;
+    width: 100%;
+    height: initial;
+    margin-left: 0;
+  }
 }
