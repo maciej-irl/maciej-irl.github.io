@@ -12,7 +12,6 @@ footer {
 main {
   width: 50%;
   margin: 2em auto 0;
-  overflow: hidden;
 }
 
 /* Nice padding (not applied to main to keep image to the right
@@ -31,9 +30,9 @@ main .linklist {
 main img {
   float: right;
   height: 30em;
-  margin: 0 0 2em 2em;
+  margin: 0 0 0 2em;
+  border-radius: 0 20px 20px 0;
 }
-
 
 /* Grey-ish text */
 main .hidden,
@@ -63,6 +62,20 @@ ul.linklist li {
   text-decoration: none;
   width: 100%;
   padding: 0.25em 0;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.linklist a:hover {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  padding-left: 10px;
 }
 
 /* RAINBOW a's */
@@ -111,11 +124,14 @@ ul.linklist li {
     width: 80%;
   }
 }
-@media (orientation: portrait) and (max-width: 1200px) {
+@media (orientation: portrait) and (max-width: 1250px) {
   main img{
     float: none;
     width: 100%;
     height: initial;
     margin-left: 0;
+    /* Readjust effects for being on the top */
+    margin: 0 0 2em 0;
+    border-radius: 20px 20px 0 0;
   }
 }
