@@ -65,6 +65,15 @@
         color: #000;
     }
 
+    #tape {
+        position: fixed;
+        right: 8%;
+        top: 0;
+        height: 100vh;
+        width: 198px;
+        z-index: -1;
+    }
+
     @media (max-width: 400px) {
         #big {
             font-size: 500%;
@@ -76,23 +85,85 @@
     }
 </style>
 <script>
-    const GREETINGS = ["Hi", "Hello", "Greetings", "Welcome", "Hej"];
+    const ROW_HEIGHT = 20;
+    const MESSAGE = "You've entered the domain of Maciej Goszczycki, explore at your own risk";
     window.addEventListener("load", () => {
-        let timeout = 50;
-        let timePassed = 0;
-        let greeting_index = 0;
-        const update = () => {
-            document.getElementById("big").innerText = GREETINGS[greeting_index];
-            greeting_index = (greeting_index + 1) % GREETINGS.length;
-            timePassed += timeout;
-            if (timePassed > 300 && timeout < 1500) {
-                timeout *= 1.3;
+        const tape = document.getElementById("tape")
+        const ctx = tape.getContext("2d", { alpha: true });
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+        let height_offset = 0;
+        let last_row = Math.ceil(tape.height / ROW_HEIGHT) + 1;
+        const render = () => {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, tape.width, tape.height);
+            ctx.fillStyle = "#f3f3f3";
+            ctx.strokeStyle = "#f3f3f3";
+            ctx.lineWidth = 6;
+
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, tape.height);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(tape.width, 0);
+            ctx.lineTo(tape.width, tape.height);
+            ctx.stroke();
+
+            ctx.setTransform(1, 0, 0, 1, 10, 10);
+            height_offset += 1;
+            if (height_offset > ROW_HEIGHT) {
+                ++last_row;
+                height_offset = 0;
             }
-            if (timeout < 1500) {
-                setTimeout(update, timeout);
+            for (let row = 0; row < Math.ceil(tape.height / ROW_HEIGHT) + 1; ++row) {
+                let code = MESSAGE.charCodeAt(Math.abs(last_row - row) % MESSAGE.length);
+                let bit_index = 0;
+                for (let hole = 0; hole < 5; ++hole) {
+                    if ((code & (1 << hole)) > 0) {
+                        ctx.beginPath();
+                        ctx.arc(hole * 20 + 10, row * ROW_HEIGHT - ROW_HEIGHT + height_offset, 8, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+                ctx.beginPath();
+                ctx.arc(5 * 20 + 10, row * ROW_HEIGHT - ROW_HEIGHT + height_offset, 4, 0, Math.PI * 2);
+                ctx.fill();
+                for (let hole = 5; hole < 8; ++hole) {
+                    if ((code & (1 << hole)) > 0) {
+                        ctx.beginPath();
+                        ctx.arc((hole + 1) * 20 + 10, row * ROW_HEIGHT - ROW_HEIGHT + height_offset, 8, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
             }
-        };
-        setTimeout(update, timeout);
+        }
+
+        const setup = () => {
+            tape.width = tape.offsetWidth;
+            tape.height = tape.offsetHeight;
+            render();
+        }
+
+        let resize_treshold_handle = null;
+        window.addEventListener("resize", () => {
+            if (resize_treshold_handle) {
+                clearTimeout(resize_treshold_handle);
+            }
+            resize_treshold_handle = setTimeout(() => {
+                resize_treshold_handle = null;
+                setup();
+            }, 10);
+        });
+        setup();
+        const loop = () => {
+            if (!resize_treshold_handle) {
+                render();
+            }
+            window.requestAnimationFrame(loop);
+        }
+        window.requestAnimationFrame(loop);
     });
 </script>
 <span id="big">Hi</span>
@@ -111,3 +182,5 @@ I'm<br>
     <a href="https://docs.google.com/document/d/1zK_EZ-RrC-9qQ0Ld2dZI9no3NeXukOnBKd_894JxgFg/edit?usp=sharing">CV</a>
     <a href="mailto:mgoszcz2@gmail.com">Email</a>
 </section>
+
+<canvas id="tape" width="300" height="300"></canvas>
