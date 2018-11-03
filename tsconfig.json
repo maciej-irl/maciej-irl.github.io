@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "sourceMap": true,
+        "target": "es2017",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+    }
+}

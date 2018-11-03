@@ -1,0 +1,113 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600" rel="stylesheet">
+<title>Maciej Goszczycki</title>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    h1 {
+        font: inherit;
+        font-style: italic;
+        font-size: 120%;
+        font-weight: 600;
+    }
+
+    body {
+        color: #1d1d1d;
+        line-height: 1.5;
+        font-family: 'Source Code Pro', monospace;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 120px 60px 0;
+    }
+
+    .green {
+        color: #0f0;
+    }
+
+    .red {
+        color: #f00;
+    }
+
+    .yellow {
+        color: #ffd900;
+    }
+
+    .blue {
+        color: #00f;
+    }
+
+    section {
+        margin: 40px 0;
+    }
+
+    a {
+        font: inherit;
+        font-weight: 600;
+        color: #00f;
+        padding: 5px 5px 5px 0;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:focus {
+        text-decoration: underline;
+    }
+
+    #big {
+        font-size: 600%;
+        display: block;
+        font-weight: 600;
+        color: #000;
+    }
+
+    @media (max-width: 400px) {
+        #big {
+            font-size: 500%;
+        }
+
+        body {
+            margin: 40px 20px 20px;
+        }
+    }
+</style>
+<script>
+    const GREETINGS = ["Hi", "Hello", "Greetings", "Welcome", "Hej"];
+    window.addEventListener("load", () => {
+        let timeout = 50;
+        let timePassed = 0;
+        let greeting_index = 0;
+        const update = () => {
+            document.getElementById("big").innerText = GREETINGS[greeting_index];
+            greeting_index = (greeting_index + 1) % GREETINGS.length;
+            timePassed += timeout;
+            if (timePassed > 300 && timeout < 1500) {
+                timeout *= 1.3;
+            }
+            if (timeout < 1500) {
+                setTimeout(update, timeout);
+            }
+        };
+        setTimeout(update, timeout);
+    });
+</script>
+<span id="big">Hi</span>
+I'm<br>
+<h1>Maciej<br>Goszczycki</h1>
+
+<section>
+    I study Computer Science at Maynooth University, build things with computers and have a keen interest in
+    programming languages, design and security. I also do competitive programming when I feel like it.
+    I interned at <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span
+        class="green">l</span><span class="red">e</span> <s>once</s> twice.
+</section>
+
+<section>
+    <a href="https://github.com/mgoszcz2">Github</a>
+    <a href="https://docs.google.com/document/d/1zK_EZ-RrC-9qQ0Ld2dZI9no3NeXukOnBKd_894JxgFg/edit?usp=sharing">CV</a>
+    <a href="mailto:mgoszcz2@gmail.com">Email</a>
+</section>
