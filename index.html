@@ -70,11 +70,11 @@
         right: 8%;
         top: 0;
         height: 100vh;
-        width: 198px;
+        width: 0;
         z-index: -1;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
         #big {
             font-size: 500%;
         }
@@ -85,85 +85,109 @@
     }
 </style>
 <script>
-    const ROW_HEIGHT = 20;
-    const MESSAGE = "You've entered the domain of Maciej Goszczycki, explore at your own risk";
-    window.addEventListener("load", () => {
-        const tape = document.getElementById("tape")
-        const ctx = tape.getContext("2d", { alpha: true });
-        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    const mobileQuery = window.matchMedia("(max-width: 500px)");
 
-        let height_offset = 0;
-        let last_row = Math.ceil(tape.height / ROW_HEIGHT) + 1;
+    const dimensions = () => {
+        const scale = mobileQuery.matches ? 1.5 : 1;
+        return {
+            spacing: Math.floor(20 / scale),
+            sprocket_radius: Math.floor(4 / scale),
+            punch_radius: Math.floor(8 / scale)
+        };
+    }
+
+    const parity = (x) => {
+        let odd = false;
+        while (x) {
+            if (x & 1) odd = !odd;
+            x >>= 1;
+        }
+        return odd;
+    }
+
+    window.addEventListener("load", () => {
+        const content = document.documentElement.innerHTML;
+        const canvas = document.getElementById("tape")
+        const ctx = canvas.getContext("2d", { alpha: true });
+
+
+        let vertical_offset = 0;
+        let row_offset = Math.floor(Math.random() * content.length);
         const render = () => {
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, tape.width, tape.height);
+            const dims = dimensions();
+
+            const drawCircle = (row, hole, radius) => {
+                ctx.beginPath();
+                ctx.arc(hole * dims.spacing + dims.spacing,
+                    (row - 1) * dims.spacing + vertical_offset, radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            const drawLine = (x1, y1, x2, y2) => {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#f3f3f3";
             ctx.strokeStyle = "#f3f3f3";
             ctx.lineWidth = 6;
 
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, tape.height);
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.moveTo(tape.width, 0);
-            ctx.lineTo(tape.width, tape.height);
-            ctx.stroke();
-
-            ctx.setTransform(1, 0, 0, 1, 10, 10);
-            height_offset += 1;
-            if (height_offset > ROW_HEIGHT) {
-                ++last_row;
-                height_offset = 0;
+            vertical_offset += 1;
+            if (vertical_offset > dims.spacing) {
+                ++row_offset;
+                vertical_offset = 0;
             }
-            for (let row = 0; row < Math.ceil(tape.height / ROW_HEIGHT) + 1; ++row) {
-                let code = MESSAGE.charCodeAt(Math.abs(last_row - row) % MESSAGE.length);
-                let bit_index = 0;
-                for (let hole = 0; hole < 5; ++hole) {
-                    if ((code & (1 << hole)) > 0) {
-                        ctx.beginPath();
-                        ctx.arc(hole * 20 + 10, row * ROW_HEIGHT - ROW_HEIGHT + height_offset, 8, 0, Math.PI * 2);
-                        ctx.fill();
+
+            drawLine(0, 0, 0, canvas.height);
+            drawLine(canvas.width, 0, canvas.width, canvas.height);
+            const row_count = Math.ceil(canvas.height / dims.spacing) + 1;
+            for (let row = 0; row < row_count + 1; ++row) {
+                const index = (row_offset + row_count - row) % content.length;
+                const code = content.charCodeAt(index);
+                for (let hole = 0; hole < 7; ++hole) {
+                    if (code & (1 << hole)) {
+                        drawCircle(row, hole + (hole > 4), dims.punch_radius);
                     }
                 }
-                ctx.beginPath();
-                ctx.arc(5 * 20 + 10, row * ROW_HEIGHT - ROW_HEIGHT + height_offset, 4, 0, Math.PI * 2);
-                ctx.fill();
-                for (let hole = 5; hole < 8; ++hole) {
-                    if ((code & (1 << hole)) > 0) {
-                        ctx.beginPath();
-                        ctx.arc((hole + 1) * 20 + 10, row * ROW_HEIGHT - ROW_HEIGHT + height_offset, 8, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
+                if (parity(code)) drawCircle(row, 8, dims.punch_radius);
+                drawCircle(row, 5, dims.sprocket_radius);
             }
         }
 
-        const setup = () => {
-            tape.width = tape.offsetWidth;
-            tape.height = tape.offsetHeight;
+        const resizeRender = () => {
+            const width = dimensions().spacing * 10;
+            canvas.style.width = `${width}px`;
+            canvas.width = width;
+            canvas.height = canvas.offsetHeight;
             render();
         }
 
-        let resize_treshold_handle = null;
+        // Debounce resize events, wait 10ms.
+        let resize_timeout_handle = null;
         window.addEventListener("resize", () => {
-            if (resize_treshold_handle) {
-                clearTimeout(resize_treshold_handle);
+            if (resize_timeout_handle) {
+                clearTimeout(resize_timeout_handle);
             }
-            resize_treshold_handle = setTimeout(() => {
-                resize_treshold_handle = null;
-                setup();
+            resize_timeout_handle = setTimeout(() => {
+                resize_timeout_handle = null;
+                resizeRender();
             }, 10);
         });
-        setup();
-        const loop = () => {
-            if (!resize_treshold_handle) {
+
+        const renderLoop = () => {
+            if (!resize_timeout_handle) {
                 render();
             }
-            window.requestAnimationFrame(loop);
+            window.requestAnimationFrame(renderLoop);
         }
-        window.requestAnimationFrame(loop);
+
+        // Get this show on the road.
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        resizeRender();
+        window.requestAnimationFrame(renderLoop);
     });
 </script>
 <span id="big">Hi</span>
@@ -183,4 +207,4 @@ I'm<br>
     <a href="mailto:mgoszcz2@gmail.com">Email</a>
 </section>
 
-<canvas id="tape" width="300" height="300"></canvas>
+<canvas id="tape"></canvas>
