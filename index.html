@@ -17,12 +17,22 @@
     }
 
     body {
-        color: #1d1d1d;
         line-height: 1.5;
         font-family: 'Source Code Pro', monospace;
         font-size: 18px;
         max-width: 600px;
         margin: 120px 60px 0;
+        transition: background-color 1s, color 1s;
+    }
+
+    body.light {
+        background: #fff;
+        color: #222;
+    }
+
+    body.dark {
+        background: #222;
+        color: #eee;
     }
 
     .green {
@@ -37,32 +47,49 @@
         color: #ffd900;
     }
 
-    .blue {
+    .blue,
+    a {
+        transition: color 1s;
+    }
+
+    .light .blue,
+    .light a {
         color: #00f;
     }
 
-    section {
-        margin: 40px 0;
+    .dark .blue,
+    .dark a {
+        color: #26f;
     }
 
     a {
         font: inherit;
         font-weight: 600;
-        color: #00f;
         padding: 5px 5px 5px 0;
         text-decoration: none;
     }
 
-    a:hover,
-    a:focus {
+    header,
+    p {
+        margin-bottom: 40px;
+    }
+
+    a:hover {
         text-decoration: underline;
     }
 
     #big {
         font-size: 600%;
-        display: block;
         font-weight: 600;
+        transition: color 1s;
+    }
+
+    .light #big {
         color: #000;
+    }
+
+    .dark #big {
+        color: #fff;
     }
 
     #tape {
@@ -80,7 +107,7 @@
         }
 
         body {
-            margin: 40px 20px 20px;
+            margin: 0 20px;
         }
     }
 </style>
@@ -115,6 +142,8 @@
         let row_offset = Math.floor(Math.random() * content.length);
         const render = () => {
             const dims = dimensions();
+            // const color = "#f3f3f3"; // #333 for dark mode.
+            const color = "#333";
 
             const drawCircle = (row, hole, radius) => {
                 ctx.beginPath();
@@ -131,8 +160,12 @@
             }
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#f3f3f3";
-            ctx.strokeStyle = "#f3f3f3";
+
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            // ctx.rect(0, 0, tape.width, tape.height);
+            // ctx.fill();
+            // ctx.fillStyle = "#fff";
             ctx.lineWidth = 6;
 
             vertical_offset += 1;
@@ -188,23 +221,46 @@
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         resizeRender();
         window.requestAnimationFrame(renderLoop);
+
+        let darkMode = false;
+        const button = document.getElementById("mode-switch");
+        button.addEventListener("click", () => {
+            if (darkMode) {
+                document.body.classList.replace("dark", "light");
+                button.innerText = "Dark mode";
+            } else {
+                document.body.classList.replace("light", "dark");
+                button.innerText = "Light mode";
+            }
+            darkMode = !darkMode;
+        })
     });
 </script>
-<span id="big">Hi</span>
-I'm<br>
-<h1>Maciej<br>Goszczycki</h1>
 
-<section>
-    I study Computer Science at Maynooth University, build things with computers and have a keen interest in
-    programming languages, design and security. I also do competitive programming when I feel like it.
-    I interned at <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span
-        class="green">l</span><span class="red">e</span> <s>once</s> twice.
-</section>
+<body class="light">
+    <header>
+        <span id="big">Hi</span><br>
+        I'm<br>
+        <h1>Maciej<br>Goszczycki</h1>
+    </header>
 
-<section>
-    <a href="https://github.com/mgoszcz2">Github</a>
-    <a href="https://docs.google.com/document/d/1zK_EZ-RrC-9qQ0Ld2dZI9no3NeXukOnBKd_894JxgFg/edit?usp=sharing">CV</a>
-    <a href="mailto:mgoszcz2@gmail.com">Email</a>
-</section>
+    <main>
+        <p>
+            I study Computer Science at Maynooth University, build things with computers and have a keen interest in
+            programming languages, design and security. I also do competitive programming when I feel like it.
+            I interned at
+            <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span
+                class="green">l</span><span class="red">e</span>
+            <s>once</s> twice.
+        </p>
 
-<canvas id="tape"></canvas>
+        <section>
+            <a href="https://github.com/mgoszcz2">Github</a>
+            <a href="https://docs.google.com/document/d/1zK_EZ-RrC-9qQ0Ld2dZI9no3NeXukOnBKd_894JxgFg/edit?usp=sharing">CV</a>
+            <a href="mailto:mgoszcz2@gmail.com">Email</a>
+            <a href="#" id="mode-switch">Dark mode</a>
+        </section>
+    </main>
+
+    <canvas id="tape"></canvas>
+</body>
