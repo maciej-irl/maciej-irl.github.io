@@ -96,7 +96,7 @@
         position: fixed;
         right: 8%;
         top: 0;
-        height: 100vh;
+        height: calc(100vh + 20px);
         width: 0;
         z-index: -1;
     }
@@ -140,15 +140,14 @@
 
         let vertical_offset = 0;
         let row_offset = Math.floor(Math.random() * content.length);
-        const render = () => {
+        const reallyRender = () => {
             const dims = dimensions();
-            // const color = "#f3f3f3"; // #333 for dark mode.
-            const color = "#333";
+            const color = "#f3f3f3";
 
             const drawCircle = (row, hole, radius) => {
                 ctx.beginPath();
                 ctx.arc(hole * dims.spacing + dims.spacing,
-                    (row - 1) * dims.spacing + vertical_offset, radius, 0, Math.PI * 2);
+                    (row - 1) * dims.spacing, radius, 0, Math.PI * 2);
                 ctx.fill();
             }
 
@@ -160,19 +159,9 @@
             }
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             ctx.fillStyle = color;
             ctx.strokeStyle = color;
-            // ctx.rect(0, 0, tape.width, tape.height);
-            // ctx.fill();
-            // ctx.fillStyle = "#fff";
             ctx.lineWidth = 6;
-
-            vertical_offset += 1;
-            if (vertical_offset > dims.spacing) {
-                ++row_offset;
-                vertical_offset = 0;
-            }
 
             drawLine(0, 0, 0, canvas.height);
             drawLine(canvas.width, 0, canvas.width, canvas.height);
@@ -190,12 +179,26 @@
             }
         }
 
+        const render = (force) => {
+            const dims = dimensions();
+            vertical_offset += 1;
+            if (vertical_offset > dims.spacing) {
+                ++row_offset;
+                vertical_offset = 0;
+                reallyRender();
+            } else if (force) {
+                reallyRender();
+            }
+            // canvas.style.top = `${vertical_offset - dims.spacing}px`;
+            canvas.style.transform = `translateY(${vertical_offset - dims.spacing}px)`
+        }
+
         const resizeRender = () => {
             const width = dimensions().spacing * 10;
             canvas.style.width = `${width}px`;
             canvas.width = width;
             canvas.height = canvas.offsetHeight;
-            render();
+            render(true);
         }
 
         // Debounce resize events, wait 10ms.
@@ -212,7 +215,7 @@
 
         const renderLoop = () => {
             if (!resize_timeout_handle) {
-                render();
+                render(false);
             }
             window.requestAnimationFrame(renderLoop);
         }
