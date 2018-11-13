@@ -230,19 +230,6 @@
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         resizeRender();
         window.requestAnimationFrame(renderLoop);
-
-        let darkMode = false;
-        const button = document.getElementById("mode-switch");
-        button.addEventListener("click", () => {
-            if (darkMode) {
-                document.body.classList.replace("dark", "light");
-                button.innerText = "Dark mode";
-            } else {
-                document.body.classList.replace("light", "dark");
-                button.innerText = "Light mode";
-            }
-            darkMode = !darkMode;
-        })
     });
 </script>
 
