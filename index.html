@@ -233,7 +233,9 @@
         // Get this show on the road.
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         resizeRender();
-        window.requestAnimationFrame(renderLoop);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            window.requestAnimationFrame(renderLoop);
+        }
     });
 </script>
 
