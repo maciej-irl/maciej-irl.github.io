@@ -19,26 +19,26 @@
 
     body {
         line-height: 1.5;
-        /* font-family: 'Overpass', sans-serif; */
         font-family: 'Source Code Pro', monospace;
         font-size: 18px;
         max-width: 600px;
         margin: 120px 60px 0;
-        transition: background-color 1s, color 1s;
     }
 
     main {
         font-family: 'Overpass', sans-serif;
     }
 
-    body.light {
+    body {
         background: #fff;
         color: #222;
     }
 
-    body.dark {
-        background: #222;
-        color: #eee;
+    @media (prefers-color-scheme: dark) {
+        body {
+            background: #222;
+            color: #eee;
+        }
     }
 
     .green {
@@ -55,17 +55,14 @@
 
     .blue,
     a {
-        transition: color 1s;
-    }
-
-    .light .blue,
-    .light a {
         color: #00f;
     }
 
-    .dark .blue,
-    .dark a {
-        color: #26f;
+    @media (prefers-color-scheme: dark) {
+        .blue,
+        a {
+            color: #26f;
+        }
     }
 
     a {
@@ -87,15 +84,16 @@
     #big {
         font-size: 600%;
         font-weight: 600;
-        transition: color 1s;
     }
 
-    .light #big {
+    #big {
         color: #000;
     }
 
-    .dark #big {
-        color: #fff;
+    @media (prefers-color-scheme: dark) {
+        #big {
+            color: #fff;
+        }
     }
 
     #tape {
@@ -146,9 +144,11 @@
 
         let vertical_offset = 0;
         let row_offset = Math.floor(Math.random() * content.length);
-        const reallyRender = () => {
+        let dark_mode = false;
+
+        const forceRender = () => {
             const dims = dimensions();
-            const color = "#f3f3f3";
+            const color = dark_mode ? "#333333" : "#f3f3f3";
 
             const drawCircle = (row, hole, radius) => {
                 ctx.beginPath();
@@ -185,17 +185,21 @@
             }
         }
 
-        const render = (force) => {
+        const query = window.matchMedia("(prefers-color-scheme: dark)");
+        dark_mode = query.matches;
+        query.addListener((e) => {
+            dark_mode = e.matches;
+            forceRender();
+        });
+
+        const render = () => {
             const dims = dimensions();
             vertical_offset += 1;
             if (vertical_offset > dims.spacing) {
                 ++row_offset;
                 vertical_offset = 0;
-                reallyRender();
-            } else if (force) {
-                reallyRender();
+                forceRender();
             }
-            // canvas.style.top = `${vertical_offset - dims.spacing}px`;
             canvas.style.transform = `translateY(${vertical_offset - dims.spacing}px)`
         }
 
@@ -204,7 +208,7 @@
             canvas.style.width = `${width}px`;
             canvas.width = width;
             canvas.height = canvas.offsetHeight;
-            render(true);
+            forceRender();
         }
 
         // Debounce resize events, wait 10ms.
@@ -221,7 +225,7 @@
 
         const renderLoop = () => {
             if (!resize_timeout_handle) {
-                render(false);
+                render();
             }
             window.requestAnimationFrame(renderLoop);
         }
@@ -233,7 +237,7 @@
     });
 </script>
 
-<body class="light">
+<body>
     <header>
         <span id="big">Hi</span><br>
         I'm<br>
@@ -245,13 +249,14 @@
             I study Computer Science at Maynooth University, build things with computers and have a keen interest in
             programming languages, design and security. I also do competitive programming when I feel like it.
             I interned at
-            <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span
-                class="green">l</span><span class="red">e</span> twice.
+            <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span
+                class="blue">g</span><span class="green">l</span><span class="red">e</span> twice.
         </p>
 
         <section>
             <a href="https://github.com/mgoszcz2">Github</a>
-            <a href="https://docs.google.com/document/d/1zK_EZ-RrC-9qQ0Ld2dZI9no3NeXukOnBKd_894JxgFg/edit?usp=sharing">CV</a>
+            <a
+                href="https://docs.google.com/document/d/1zK_EZ-RrC-9qQ0Ld2dZI9no3NeXukOnBKd_894JxgFg/edit?usp=sharing">CV</a>
             <a href="mailto:mgoszcz2@gmail.com">Email</a>
         </section>
     </main>
