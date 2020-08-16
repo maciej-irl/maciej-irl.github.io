@@ -247,6 +247,42 @@
     });
 </script>
 
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "https://maciej.ie/#website",
+            "url": "https://maciej.ie/",
+            "name": "Maciej Goszczycki",
+            "description": "Maciej Goszczycki's Personal Site",
+            "publisher": { "@id": "https://maciej.ie/#maciej" },
+            "inLanguage": "en-IE"
+        },
+        {
+            "@type": ["WebPage", "ProfilePage"],
+            "@id": "https://maciej.ie/#webpage",
+            "url": "https://maciej.ie/",
+            "name": "Maciej Goszczycki - Homepage",
+            "isPartOf": { "@id": "https://maciej.ie/#website" },
+            "datePublished": "2018-06-01T07:45:43+00:00",
+            "dateModified": "2019-10-30T07:52:44+00:00",
+            "description": "Maciej Goszczycki is a master's Computer Science student at the Chalmers University of Technology. Find out more.",
+            "inLanguage": "en-IE"
+        },
+        {
+            "@type": "Person",
+            "@id": "https://maciej.ie/#maciej",
+            "name": "Maciej Goszczycki",
+            "description": "Maciej Goszczycki is a master's Computer Science student at the Chalmers University of Technology",
+            "sameAs": ["https://twitter.com/maciej_irl", "https://github.com/mgoszcz2"],
+            "mainEntityOfPage": { "@id": "https://maciej.ie/#webpage" }
+        }
+    ]
+}
+</script>
+
 <body>
     <header>
         <span id="big">Hi</span><br>
