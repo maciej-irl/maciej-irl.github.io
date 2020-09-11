@@ -149,7 +149,7 @@
     }
 
     window.addEventListener("load", () => {
-        const content = document.documentElement.innerHTML;
+        const content = document.documentElement.innerHTML.replace(/\s\s+/g, ' ');
         const canvas = document.getElementById("tape")
         const ctx = canvas.getContext("2d", { alpha: true });
 
@@ -160,7 +160,6 @@
 
         const forceRender = () => {
             const dims = dimensions();
-            const color = dark_mode ? "#333333" : "#f3f3f3";
 
             const drawCircle = (row, hole, radius) => {
                 ctx.beginPath();
@@ -177,12 +176,15 @@
             }
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = color;
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 6;
 
-            drawLine(0, 0, 0, canvas.height);
-            drawLine(canvas.width, 0, canvas.width, canvas.height);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = dark_mode ? "#4a4a4a" : "#e0e0e0";
+            drawLine(1, 0, 1, canvas.height);
+            ctx.strokeStyle = dark_mode ? "#555555" : "#d0d0d0";
+            drawLine(canvas.width - 1, 0, canvas.width - 1, canvas.height);
+
+            ctx.lineWidth = 1;
+            ctx.fillStyle = dark_mode ? "#333333" : "#eeeeee";
             const row_count = Math.ceil(canvas.height / dims.spacing) + 1;
             for (let row = 0; row < row_count + 1; ++row) {
                 const index = (row_offset + row_count - row) % content.length;
